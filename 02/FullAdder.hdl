@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/02/FullAdder.hdl
+//只有部分原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫
 
 /**
  * Computes the sum of three bits.
@@ -14,4 +15,9 @@ CHIP FullAdder {
 
     PARTS:
     // Put you code here:
+    Xor(a=a,b=b,out=X);
+    Xor(a=X,b=c,out=sum);
+    And(a=a,b=b,out=Y);
+    And(a=X,b=c,out=Z);
+    Or(a=Y,b=Z,out=carry);
 }
