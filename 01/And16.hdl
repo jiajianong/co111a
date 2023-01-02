@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/01/And16.hdl
+//基本上原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫\
 
 /**
  * 16-bit bitwise And:
