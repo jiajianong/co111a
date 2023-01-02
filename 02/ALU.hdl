@@ -32,7 +32,7 @@ CHIP ALU {
     IN  
         x[16], y[16],  // 16-bit inputs        
         zx, // zero the x input?
-        nx, // negate the x input?
+        nx, // negate the x input? 
         zy, // zero the y input?
         ny, // negate the y input?
         f,  // compute out = x + y (if 1) or x & y (if 0)
