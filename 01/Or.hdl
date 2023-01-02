@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/01/Or.hdl
+//基本上原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫
 
  /**
  * Or gate:
@@ -15,4 +16,11 @@ CHIP Or {
 
     PARTS:
     // Put your code here:
+    Or(a=in[0], b=in[1], out=out1);
+    Or(a=in[2], b=in[3], out=out2);
+    Or(a=in[4], b=in[5], out=out3);
+    Or(a=in[6], b=in[7], out=out4);
+    Or(a=out1, b=out2, out=out12);
+    Or(a=out3, b=out4, out=out34);
+    Or(a=out12, b=out34, out=out);
 }
