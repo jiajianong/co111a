@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/01/Mux4Way16.hdl
+//基本上原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫
 
 /**
  * 4-way 16-bit multiplexor:
@@ -16,5 +17,8 @@ CHIP Mux4Way16 {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    // Put your code here:    
+    Mux16(a=a,b=b,sel=sel[0],out=sel1);
+    Mux16(a=c,b=d,sel=sel[0],out=sel2);
+    Mux16(a=sel1,b=sel2,sel=sel[1],out=out);
 }
