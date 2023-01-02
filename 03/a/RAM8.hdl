@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/03/a/RAM8.hdl
+//只有部分原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫
 
 /**
  * Memory of 8 registers, each 16 bit-wide. Out holds the value
@@ -16,4 +17,16 @@ CHIP RAM8 {
 
     PARTS:
     // Put your code here:
+    DMux8Way(in=load, sel=address, a=a, b=b, c=c, d=d, e=e, f=f, g=g, h=h);
+
+    Register(in=in, load=a, out=aa);
+    Register(in=in, load=b, out=bb);
+    Register(in=in, load=c, out=cc);
+    Register(in=in, load=d, out=dd);
+    Register(in=in, load=e, out=ee);
+    Register(in=in, load=f, out=ff);
+    Register(in=in, load=g, out=gg);
+    Register(in=in, load=h, out=hh);
+
+    Mux8Way16(a=aa, b=bb, c=cc, d=dd, e=ee, f=ff, g=gg, h=hh, sel=address, out=out);
 }
