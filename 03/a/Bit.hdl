@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/03/a/Bit.hdl
+//只有部分原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫
 
 /**
  * 1-bit register:
@@ -15,4 +16,7 @@ CHIP Bit {
 
     PARTS:
     // Put your code here:
+    Not(in=load,out=load1);
+    Mux(a=in,b=y1,sel=load1,out=do);
+    DFF(in=do,out=out,out=y1);
 }
