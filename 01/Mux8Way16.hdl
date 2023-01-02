@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/01/Mux8Way16.hdl
+//基本上原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫
 
 /**
  * 8-way 16-bit multiplexor:
@@ -19,4 +20,7 @@ CHIP Mux8Way16 {
 
     PARTS:
     // Put your code here:
+    Mux4Way16(a=a, b=b, c=c, d=d, sel[0]=sel[0], sel[1]=sel[1], out=x);
+    Mux4Way16(a=e, b=f, c=g, d=h, sel[0]=sel[0], sel[1]=sel[1], out=y);
+    Mux16(a=x, b=y, sel=sel[2], out=out);
 }
