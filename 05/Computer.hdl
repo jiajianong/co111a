@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/05/Computer.hdl
+//只有部分原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫
 
 /**
  * The HACK computer, including CPU, ROM and RAM.
@@ -20,4 +21,7 @@ CHIP Computer {
 
     PARTS:
     // Put your code here:
+    CPU(inM=inM, instruction=instruction, reset=reset, outM=outM, writeM=writeM, addressM=addressM, pc=pc);
+    Memory(in=outM, load=writeM, address=addressM, out=inM);
+    ROM32K(address=pc, out=instruction);
 }
