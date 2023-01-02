@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/02/Inc16.hdl
+//只有部分原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫
 
 /**
  * 16-bit incrementer:
@@ -14,4 +15,5 @@ CHIP Inc16 {
 
     PARTS:
    // Put you code here:
+   Add16(a=in, b[0]=true, out=out);
 }
