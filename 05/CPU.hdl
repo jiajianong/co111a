@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/05/CPU.hdl
+//只有部分原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫
 
 /**
  * The Hack CPU (Central Processing unit), consisting of an ALU,
@@ -40,4 +41,37 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
+    Mux16(a=instruction,b=alu2,sel=instruction[15],out=M1);
+    And(a=instruction[15],b=instruction[5],out=A1);
+    Not(in=instruction[15],out=ninst);
+    Or(a=A1,b=ninst,out=or1);
+    ARegister(in=M1,load=or1,out=Aout1,out[0..14]=addressM);
+
+    Mux16(a=Aout1,b=inM,sel=instruction[12],out=M2);
+    And(a=instruction[15],b=instruction[4],out=A2);
+    DRegister(in=alu2,load=A2,out=Dout1);
+
+    ALU(x=Dout1,y=M2,zx=instruction[11],nx=instruction[10],zy=instruction[9],ny=instruction[8],f=instruction[7],no=instruction[6],out=outM,out=alu2,zr=zr1,ng=ng1);
+    
+    PC(in=Aout1,load=anload,reset=reset,inc=true,out[0..14]=pc);
+
+    Mux(a=false,b=true,sel=instruction[2],out=Mu2);
+    Mux(a=false,b=true,sel=instruction[1],out=Mu1);
+    Mux(a=false,b=true,sel=instruction[0],out=Mu0);
+    
+    And(a=Mu2,b=Mu1,out=Amu21);
+    And(a=Amu21,b=Mu0,out=JMP);
+    And(a=Mu1,b=zr1,out=EQ);
+    And(a=Mu2,b=ng1,out=LT);
+
+    Not(in=ng1,out=nng1);
+    And(a=nng1,b=Mu0,out=nngmu1);
+
+    Not(in=zr1,out=nzr1);
+    And(a=nzr1,b=nngmu1,out=GT);
+
+    Or8Way(in[0]=JMP,in[1]=EQ,in[2]=LT,in[3]=GT,in[4..7]=false,out=or81);
+    And(a=instruction[15],b=or81,out=anload);
+    And(a=instruction[3],b=instruction[15],out=wr);
+    Mux(a=false,b=true,sel=wr,out=writeM);
 }
