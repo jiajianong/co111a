@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/01/Xor.hdl
+//基本上原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫
 
 /**
  * Exclusive-or gate:
@@ -14,4 +15,9 @@ CHIP Xor {
 
     PARTS:
     // Put your code here:
+    Not(in=a,out=nota);
+    Not(in=b,out=notb);
+    And(a=a,b=notb,out=w1);
+    And(a=nota,b=b,out=w2);
+    Or(a=w1,b=w2,out=out);
 }
