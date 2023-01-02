@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/03/b/RAM4K.hdl
+//只有部分原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫
 
 /**
  * Memory of 4K registers, each 16 bit-wide. Out holds the value
@@ -16,4 +17,16 @@ CHIP RAM4K {
 
     PARTS:
     // Put your code here:
+    DMux8Way(in=load,sel=address[9..11],a=a1,b=b1,c=c1,d=d1,e=e1,f=f1,g=g1,h=h1);
+
+    RAM512(in=in,load=a1,address=address[0..8],out=o1);
+    RAM512(in=in,load=b1,address=address[0..8],out=o2);
+    RAM512(in=in,load=c1,address=address[0..8],out=o3);
+    RAM512(in=in,load=d1,address=address[0..8],out=o4);
+    RAM512(in=in,load=e1,address=address[0..8],out=o5);
+    RAM512(in=in,load=f1,address=address[0..8],out=o6);
+    RAM512(in=in,load=g1,address=address[0..8],out=o7);
+    RAM512(in=in,load=h1,address=address[0..8],out=o8);
+
+    Mux8Way16(a=o1,b=o2,c=o3,d=o4,e=o5,f=o6,g=o7,h=o8,sel=address[9..11],out=out);
 }
