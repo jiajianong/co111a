@@ -2,6 +2,8 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/02/ALU.hdl
+// 看影片教學後打出來的，網址:https://www.youtube.com/watch?v=Wl53tFc5WYQ
+
 
 /**
  * The ALU (Arithmetic Logic Unit).
@@ -43,4 +45,28 @@ CHIP ALU {
 
     PARTS:
    // Put you code here:
+   // ZX and ZY flag handling
+   Mux16(a=x, b=false, sel=zx, out=xMux);
+   Mux16(a=y, b=false, sel=zy, out=yMux);
+
+   //NX and NY flag handling
+   Not16(in=xMux, out=notX);
+   Mux16(a=xMux, b=notX, sel=nx, out=readyX);
+   Not16(in=yMux, out=notY);
+   Mux16(a=yMux, b=notY, sel=ny, out=readyY);
+   
+   //f control bit handling
+   And16(a=readyX, b=readyY, out=andOut);
+   Add16(a=readyX, b=readyY, out=addOut);
+   Mux16(a=andOut, b=addOut, sel=f, out=fOut);
+
+   //NO control bit handling out, ng flag
+   Not16(in=fOut, out=fNotOut);
+   Mux16(a=fOut, b=fNotOut, sel=no, out[15]=ng, out[0..7]=zrLow, out[8..15]=zrHigh, out=out);
+
+   //ZR flag handling
+   Or8Way(in=zrLow, out=or1Out);
+   Or8Way(in=zrHigh, out=or2Out);
+   Or(a=or1Out, b=or2Out, out=or3Out);
+   Not(in=or3Out, out=zr);
 }
