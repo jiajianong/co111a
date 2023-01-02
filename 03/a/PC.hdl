@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/03/a/PC.hdl
+//只有部分原創，但遇到真的想不出來時會參考網路上資源和已經繳交的同學，看懂後再寫
 
 /**
  * A 16-bit counter with load and reset control bits.
@@ -17,4 +18,13 @@ CHIP PC {
 
     PARTS:
     // Put your code here:
+    Inc16(in=x1,out=y1);
+
+	Mux16(a=x1,b=y1,sel=inc,out=z);
+
+	Mux16(a=z,b=in,sel=load,out=z1);
+
+	Mux16(a=z1,b[0..15]=false,sel=reset,out=this);
+	
+	Register(in=this,load=true,out=out,out=x1);
 }
